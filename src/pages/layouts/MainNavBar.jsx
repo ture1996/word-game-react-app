@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userService } from "../../services/UserService";
+import { MainNavBarDetails } from "../details/MainNavBarDetails";
 
 export const MainNavBar = () => {
 
@@ -22,7 +23,6 @@ export const MainNavBar = () => {
     const handleGetUser = async (id) => {
         const data = await userService.get(id);
         setUserData(data);
-        console.log(data.game['is_ongoing'])
         setIsOngoing(data.game['is_ongoing'])
     };
 
@@ -32,35 +32,12 @@ export const MainNavBar = () => {
     }
 
     return (
-        <div>
-            <button
-                type="button"
-                onClick={() =>
-                    navigator("/users/" + userId)
-                }
-            >
-                Personal info
-            </button>
-            {" "}
-            <button
-                type="button"
-                onClick={() =>
-                    navigator("/highscores")
-                }
-            >
-                High Scores
-            </button>
-            {" "}
-            <button
-                type="button"
-                onClick={() =>
-                    startGame()
-                }
-            >
-                Play
-            </button>
-            <br />
-        </div>
+        <MainNavBarDetails
+            userId={userId}
+            startGame={startGame}
+            userData={userData}
+            navigator={navigator}
+        />
     );
 
 }

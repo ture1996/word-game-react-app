@@ -9,8 +9,8 @@ export const Game = () => {
     const [isOngoing, setIsOngoing] = useState(1);
     const [gameData, setGameData] = useState();
     const { id } = useParams();
-
-    console.log(id);
+    const [wordToCheck, setWordToCheck] = useState('');
+    const [isWordValidated, setIsWordValidated] = useState(false);
 
     useEffect(() => {
         if (!isOngoing) {
@@ -20,12 +20,11 @@ export const Game = () => {
 
     useEffect(() => {
         handleGetUser(id);
-    }, [])
+    }, [isWordValidated])
 
     const handleGetUser = async (id) => {
         const data = await userService.get(id);
         setGameData(data.game);
-        console.log(data.game['is_ongoing'])
         setIsOngoing(data.game['is_ongoing'])
     };
 
@@ -34,9 +33,26 @@ export const Game = () => {
         navigator("/");
     }
 
+    const checkWord = async (e) => {
+        e.preventDefault();
+        await userService.playGame(id, wordToCheck);
+        setIsWordValidated(!isWordValidated);
+        setWordToCheck('')
+    }
+
+    const changeHandler = (e) => {
+        setWordToCheck(e.target.value);
+    }
+
     return (
         <div>
-            <GameDetails endGame={endGame} />
+            <GameDetails
+                endGame={endGame}
+                gameData={gameData}
+                checkWord={checkWord}
+                handleOnChange={changeHandler}
+                wordToCheck={wordToCheck}
+            />
         </div>
     );
 };
