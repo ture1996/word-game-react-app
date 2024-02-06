@@ -15,7 +15,6 @@ export const Register = () => {
     });
 
     const changeHandler = (e) => {
-        console.log(credentials);
         if (e.target.name == "terms") {
             setCredentials({ ...credentials, [e.target.name]: e.target.checked });
             return;
