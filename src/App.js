@@ -15,14 +15,13 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<Page />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route element={<Main />}>
             <Route path="/" element={<MainNavBar />} />
             <Route path="/users/:id" element={<PersonalInfo />} />
             <Route path="/highscores" element={<HighScores />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Route>
+          </Route></Route>
         <Route path="/games/:id" element={<Game />} />
       </Routes>
     </BrowserRouter>

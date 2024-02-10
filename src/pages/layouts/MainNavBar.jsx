@@ -17,7 +17,11 @@ export const MainNavBar = () => {
     }, [isOngoing])
 
     useEffect(() => {
-        handleGetUser(userId);
+        if (userId != null) {
+            handleGetUser(userId);
+        } else {
+            navigator("/login");
+        }
     }, [])
 
     const handleGetUser = async (id) => {
