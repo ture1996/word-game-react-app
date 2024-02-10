@@ -24,12 +24,11 @@ export const Register = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        try {
-            await authService.register(credentials);
-        } catch (error) {
-            alert(error.response.data.message)
+        if (!credentials.email || !credentials.password) {
+            alert("Bad credentials");
+            return;
         }
-
+        await authService.register(credentials);
     };
 
     return (
