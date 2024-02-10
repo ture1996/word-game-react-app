@@ -40,8 +40,12 @@ export const PersonalInfo = () => {
 
     const changeNickName = async (e) => {
         e.preventDefault();
-        await userService.changeNickName(id, newNickName);
-        navigator("/");
+        try {
+            await userService.changeNickName(id, newNickName);
+            navigator("/");
+        } catch (error) {
+            alert(error.response.data.message);
+        }
     }
 
 

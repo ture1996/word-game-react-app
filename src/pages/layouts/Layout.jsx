@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { NavBar } from "./NavBar";
+import { NavBar } from "../navbars/NavBar";
 const Page = () => {
 
     const navigator = useNavigate();

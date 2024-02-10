@@ -17,17 +17,20 @@ export const MainNavBar = () => {
     }, [isOngoing])
 
     useEffect(() => {
-        if (userId != null) {
-            handleGetUser(userId);
-        } else {
-            navigator("/login");
-        }
+        handleGetUser(userId);
     }, [])
 
     const handleGetUser = async (id) => {
-        const data = await userService.get(id);
-        setUserData(data);
-        setIsOngoing(data.game['is_ongoing'])
+        try {
+            const data = await userService.get(id);
+            setUserData(data);
+            setIsOngoing(data.game['is_ongoing'])
+        } catch (error) {
+            window.localStorage.removeItem("token");
+            window.localStorage.removeItem("user_id");
+            navigator("/login");
+            alert("Your session timedout please login again")
+        }
     };
 
     const startGame = async () => {
