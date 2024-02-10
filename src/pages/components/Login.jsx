@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LoginDetails } from "../details/LoginDetails";
+import { LoginDetails } from "../details/login-register/LoginDetails";
 import { authService } from "../../services/AuthService";
 import { useNavigate } from "react-router-dom";
 
@@ -14,11 +14,13 @@ export const Login = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        if (!credentials.email || !credentials.password) {
-            alert("Bad credentials");
-            return;
+        try {
+            await authService.login(credentials)
         }
-        await authService.login(credentials);
+        catch (error) {
+            alert("Bad credentials");
+        }
+
     };
 
     return (
@@ -27,6 +29,7 @@ export const Login = () => {
                 credentials={credentials}
                 handleOnChange={(e) => changeHandler(e)}
                 handleSubmit={(e) => submitHandler(e)}
+                navigator={navigator}
             />) : (navigator('/'))
     );
 };

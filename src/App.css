@@ -28,10 +28,32 @@
   color: #61dafb;
 }
 
+.nav-button {
+  padding: 1em;
+  background: hsl(233deg 36% 38%);
+  color: hsl(0 0 100);
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+}
+
+.fullscreen {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

@@ -23,9 +23,16 @@ export const Game = () => {
     }, [isWordValidated])
 
     const handleGetUser = async (id) => {
-        const data = await userService.get(id);
-        setGameData(data.game);
-        setIsOngoing(data.game['is_ongoing'])
+        try {
+            const data = await userService.get(id);
+            setGameData(data.game);
+            setIsOngoing(data.game['is_ongoing'])
+        } catch (error) {
+            window.localStorage.removeItem("token");
+            window.localStorage.removeItem("user_id");
+            navigator("/login");
+            alert("Your session expired please login again");
+        }
     };
 
     const endGame = async () => {

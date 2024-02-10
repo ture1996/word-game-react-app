@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RegisterDetails } from "../details/RegisterDetails";
+import { RegisterDetails } from "../details/login-register/RegisterDetails";
 import { authService } from "../../services/AuthService";
 
 export const Register = () => {
@@ -24,11 +24,11 @@ export const Register = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        if (!credentials.email || !credentials.password) {
-            alert("Bad credentials");
-            return;
+        try {
+            await authService.register(credentials);
+        } catch (error) {
+            alert(error.response.data.message);
         }
-        await authService.register(credentials);
     };
 
     return (

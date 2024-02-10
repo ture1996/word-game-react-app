@@ -1,13 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import { authService } from "../../services/AuthService";
+import './NavBar.css';
 
-export const NavBar = () => {
-    const navigate = useNavigate();
+export const NavBarDetails = ({ navigator, authService }) => {
+
     return (
-        <div>
+        <div className="nav-bar">
             {window.localStorage.getItem("token") ? (
-                <nav>
-                    <button
+                <>
+                    <button className="nav-button"
                         type="button"
                         onClick={() =>
                             authService.logout()
@@ -16,34 +15,35 @@ export const NavBar = () => {
                         Logout
                     </button>
                     {" "}
-                    <button
+                    <button className="nav-button"
                         type="button"
                         onClick={() => {
-                            navigate("/");
+                            navigator("/");
                         }}
                     >Home</button>
-                </nav>
+                </>
             ) : (
-                <nav>
-                    <button
+                <>
+                    <button className="nav-button"
                         type="button"
                         onClick={() => {
-                            navigate("/login");
+                            navigator("/login");
                         }}
                     >
                         Login
                     </button>
                     {" "}
-                    <button
+                    <button className="nav-button"
                         type="button"
                         onClick={() => {
-                            navigate("/register");
+                            navigator("/register");
                         }}
                     >
                         Register
                     </button>
-                </nav>
+                </>
             )}
         </div>
-    );
-};
+    )
+
+}

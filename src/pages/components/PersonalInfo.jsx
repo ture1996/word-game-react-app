@@ -16,8 +16,15 @@ export const PersonalInfo = () => {
     }, [])
 
     const handleGetUser = async (id) => {
-        const data = await userService.get(id);
-        setUserData(data);
+        try {
+            const data = await userService.get(id);
+            setUserData(data);
+        } catch (error) {
+            window.localStorage.removeItem("token");
+            window.localStorage.removeItem("user_id");
+            navigator("/login");
+            alert("Your session expired please login again");
+        }
     };
 
     const deleteAccount = async () => {
@@ -40,8 +47,12 @@ export const PersonalInfo = () => {
 
     const changeNickName = async (e) => {
         e.preventDefault();
-        await userService.changeNickName(id, newNickName);
-        navigator("/");
+        try {
+            await userService.changeNickName(id, newNickName);
+            navigator("/");
+        } catch (error) {
+            alert(error.response.data.message);
+        }
     }
 
 
