@@ -1,4 +1,4 @@
-import { PersonalInfoDetails } from "../details/PersonalInfoDetails";
+import { PersonalInfoDetails } from "../details/personal-info/PersonalInfoDetails";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { userService } from "../../services/UserService";
@@ -15,14 +15,18 @@ export const PersonalInfo = () => {
         handleGetUser(id);
     }, [])
 
+    const logoutTokenExpired = () => {
+        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("user_id");
+        navigator("/login");
+    }
+
     const handleGetUser = async (id) => {
         try {
             const data = await userService.get(id);
             setUserData(data);
         } catch (error) {
-            window.localStorage.removeItem("token");
-            window.localStorage.removeItem("user_id");
-            navigator("/login");
+            logoutTokenExpired();
             alert("Your session expired please login again");
         }
     };
@@ -30,9 +34,7 @@ export const PersonalInfo = () => {
     const deleteAccount = async () => {
         if (window.confirm("You sure want to delete account?")) {
             await userService.deleteAccount(id);
-            window.localStorage.removeItem("token");
-            window.localStorage.removeItem("user_id");
-            navigator('/login');
+            logoutTokenExpired();
         }
     }
 

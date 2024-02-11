@@ -7,63 +7,43 @@
 .main-nav-bar {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-self: center;
-    position: absolute;
-    width: 600px;
-    top: 40%;
-    left: 40%;
-    margin-top: -50px;
-    margin-left: -100px;
+    width: 50%;
+    height: 100%;
 }
 
 .play {
     align-self: center;
-    padding: 1em;
+    justify-content: center;
+    padding: 3em;
     background: hsl(233deg 36% 38%);
     color: hsl(0 0 100);
     border: none;
     border-radius: 1000px;
-    font-weight: 600;
-    margin-bottom: 100px;
-    text-align: center;
-    line-height: 65px;
-    width: 100%;
+    width: 90%;
+    margin-bottom: 30px;
+    font-size: medium;
 }
 
 .info-pages {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-}
-
-.info-button-1 {
-    padding: 1em;
-    background: hsl(233deg 36% 38%);
-    color: hsl(0 0 100);
-    border: none;
-    border-radius: 1000px;
-    font-weight: 600;
-    margin-right: 50px;
-    width: 250px;
-    align-self: left;
-    line-height: 65px;
-}
-
-.info-button-2 {
-    padding: 1em;
-    background: hsl(233deg 36% 38%);
-    color: hsl(0 0 100);
-    border: none;
-    border-radius: 1000px;
-    font-weight: 600;
-    margin-left: 50px;
-    width: 250px;
-    align-self: right;
-    line-height: 65px;
+    align-self: center;
+    height: 8%;
+    gap: 10%;
 }
 
 .info-button {
-    background-color: transparent;
+    display: flex;
+    flex: 1;
+    padding: 2em;
+    background: hsl(233deg 36% 38%);
+    color: hsl(0 0 100);
+    border: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1000px;
+    width: 100%;
 }
